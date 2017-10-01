@@ -1,34 +1,61 @@
-#Import the necessary methods from tweepy library
 import tweepy
 import os
 
-print(os.environ["HOME"])
+consumer_key = os.environ.get("API_KEY", '')
+consumer_secret = os.environ.get("API_SECRET", '')
+access_token = os.environ.get("ACCESS_KEY", '')
+access_token_secret = os.environ.get("ACCESS_SECRET", '')
 
-#Variables that contains the user credentials to access Twitter API 
-# access_token = "ENTER YOUR ACCESS TOKEN"
-# access_token_secret = "ENTER YOUR ACCESS TOKEN SECRET"
-# consumer_key = "ENTER YOUR API KEY"
-# consumer_secret = "ENTER YOUR API SECRET"
+print("Initializing...")
 
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
-# #This is a basic listener that just prints received tweets to stdout.
-# class StdOutListener(StreamListener):
+api = tweepy.API(auth)
 
-#     def on_data(self, data):
-#         print data
-#         return True
+network = {}
 
-#     def on_error(self, status):
-#         print status
+def retrieve_followers(user_id):
+    followers = []
+    for follower in api.followers_ids(user_id):
+        followers.append(api.get_user(follower).screen_name)
+        print("Found one")
+    return followers
 
+def retrieve_friends(user_id):
+    users = []
+    page_count = 0
+    for user in tweepy.Cursor(api.friends, id=user_id, count=200).pages():
+        page_count += 1
+        users.extend(user)
+    return users
 
-# if __name__ == '__main__':
+print(retrieve_friends('AllenDowney'))
 
-#     #This handles Twitter authetification and the connection to Twitter Streaming API
-#     l = StdOutListener()
-#     auth = OAuthHandler(consumer_key, consumer_secret)
-#     auth.set_access_token(access_token, access_token_secret)
-#     stream = Stream(auth, l)
+def retrieve_network(n, user_id):
+    if n == 6:
+        return
+    else:
+        followers = retrieve_followers(user_id)
+        friends = retrieve_friends(user_id)
+        if user_id not in network:
+            network[user_id]['followers'] = followers
+            network[user_id]['friends'] = friends
+            for follower in followers:
+                retrieve_network(n + 1, follower)
+            for friend in friends:
+                retrieve_network(n + 1, follower)
 
-#     #This line filter Twitter Streams to capture data by the keywords: 'python', 'javascript', 'ruby'
-#     stream.filter(track=['python', 'javascript', 'ruby'])
+# import sys
+# def write_dict_to_csv(network):
+#     w = csv.DictWriter(sys.stdout, fields)
+#     for key,val in sorted(network.items()):
+#         row = {'org': key}
+#         row.update(val)
+#         w.writerow(row)
+
+def main():
+    retrieve_network(0, api.followers_ids('AllenDowney'))
+    print(network)
+
+print("Completed!")
