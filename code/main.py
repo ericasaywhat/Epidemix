@@ -1,3 +1,4 @@
+from secrets import settings
 import tweepy, os, csv
 
 os.environ['API_KEY'] = "hedERcHcJm1j9Cbs8UFuOLcA1"
