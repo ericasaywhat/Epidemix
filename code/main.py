@@ -1,5 +1,10 @@
 import tweepy, os, csv
 
+os.environ['API_KEY'] = "hedERcHcJm1j9Cbs8UFuOLcA1"
+os.environ['API_SECRET'] = "tus05AgX2caiX9QhS2Ks6nSDi41KNyiNZayTaxyOOuh63t3Mql"
+os.environ['ACCESS_KEY'] = "914568771146219521-e5r5BTexOO6c4t3ENQDUQFkpof18aKD"
+os.environ['ACCESS_SECRET'] = "sl2UZn8eN2AiGcqihpSRZgbtovFkkaoKnrCXpoC2fBVVA"
+
 consumer_key = os.environ.get("API_KEY", '')
 consumer_secret = os.environ.get("API_SECRET", '')
 access_token = os.environ.get("ACCESS_KEY", '')
@@ -21,12 +26,11 @@ def retrieve_followers(user_id):
     return followers
 
 def retrieve_friends(user_id):
-    users = []
+    friends = []
     page_count = 0
-    for user in tweepy.Cursor(api.friends, id=user_id, count=200).pages():
-        page_count += 1
-        users.extend(user)
-    return users
+    for friend in api.friends_ids(user_id):
+        friends.append(api.get_user(friend).screen_name)
+    return friends
 
 def retrieve_network(n, user_id):
     if n == 6:
@@ -53,6 +57,6 @@ def main():
     retrieve_network(0, api.followers_ids('AllenDowney'))
     print(network)
 
-main()
+# main()
 
 print("Completed!")
