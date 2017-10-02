@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import tweepy
-import os
 from secrets import settings
-=======
 import tweepy, os, csv
->>>>>>> 6d6d6a32baea18312cf6ab7c04fd3cdf077a0131
 
 consumer_key = os.environ.get("API_KEY", '')
 consumer_secret = os.environ.get("API_SECRET", '')
