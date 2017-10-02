@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import tweepy
 import os
 from secrets import settings
+=======
+import tweepy, os, csv
+>>>>>>> 6d6d6a32baea18312cf6ab7c04fd3cdf077a0131
 
 consumer_key = os.environ.get("API_KEY", '')
 consumer_secret = os.environ.get("API_SECRET", '')
@@ -12,7 +16,7 @@ print("Initializing...")
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit = True)
 
 network = {}
 
@@ -20,7 +24,6 @@ def retrieve_followers(user_id):
     followers = []
     for follower in api.followers_ids(user_id):
         followers.append(api.get_user(follower).screen_name)
-        print("Found one")
     return followers
 
 def retrieve_friends(user_id):
@@ -30,8 +33,6 @@ def retrieve_friends(user_id):
         page_count += 1
         users.extend(user)
     return users
-
-print(retrieve_friends('AllenDowney'))
 
 def retrieve_network(n, user_id):
     if n == 6:
@@ -47,16 +48,17 @@ def retrieve_network(n, user_id):
             for friend in friends:
                 retrieve_network(n + 1, follower)
 
-# import sys
-# def write_dict_to_csv(network):
-#     w = csv.DictWriter(sys.stdout, fields)
-#     for key,val in sorted(network.items()):
-#         row = {'org': key}
-#         row.update(val)
-#         w.writerow(row)
+def write_dict_to_csv(network):
+    with open('results.csv', 'w') as csv_file:
+        csvwriter = csv.writer(csv_file, delimiter='\t')
+        for user in network:
+            for attribute in network[user]:
+                csvwriter.writerow([user, attribute, network[user][attribute]])
 
 def main():
     retrieve_network(0, api.followers_ids('AllenDowney'))
     print(network)
+
+main()
 
 print("Completed!")
