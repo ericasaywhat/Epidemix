@@ -1,11 +1,6 @@
 from secrets import settings
 import tweepy, os, csv
 
-os.environ['API_KEY'] = "hedERcHcJm1j9Cbs8UFuOLcA1"
-os.environ['API_SECRET'] = "tus05AgX2caiX9QhS2Ks6nSDi41KNyiNZayTaxyOOuh63t3Mql"
-os.environ['ACCESS_KEY'] = "914568771146219521-e5r5BTexOO6c4t3ENQDUQFkpof18aKD"
-os.environ['ACCESS_SECRET'] = "sl2UZn8eN2AiGcqihpSRZgbtovFkkaoKnrCXpoC2fBVVA"
-
 consumer_key = os.environ.get("API_KEY", '')
 consumer_secret = os.environ.get("API_SECRET", '')
 access_token = os.environ.get("ACCESS_KEY", '')
