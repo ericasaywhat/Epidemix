@@ -40,13 +40,11 @@ def retrieve_network(n, user_id):
                 retrieve_network(n + 1, follower)
 
 def write_dict_to_csv(network):
-    with open('results.csv', 'w') as csv_file:
+    with open('results.csv', 'wb') as csv_file:
         csvwriter = csv.writer(csv_file, delimiter='\t')
         for user in network:
             for attribute in network[user]:
-                for item in network[user][attribute]:
-                    csvwriter.writerow([user.encode('utf-8'), attribute.encode('utf-8'), str(item).encode('utf-8')])
-                    print(item)
+                    csvwriter.writerow([user.encode('utf-8'), attribute.encode('utf-8'), str(network[user][attribute]).encode('utf-8')])
         csv_file.close()
 
 def read_csv(csv_file):
