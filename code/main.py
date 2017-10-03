@@ -34,13 +34,16 @@ def retrieve_network(n, user_id):
     else:
         followers = retrieve_followers(user_id)
         friends = retrieve_friends(user_id)
+
         if user_id not in network:
-            network[user_id]['followers'] = followers
+            network[user_id]['followers'] = follower
             network[user_id]['friends'] = friends
             for follower in followers:
                 retrieve_network(n + 1, follower)
             for friend in friends:
                 retrieve_network(n + 1, follower)
+
+    print("This is iteration " + n)
 
 def write_dict_to_csv(network):
     with open('results.csv', 'w') as csv_file:
@@ -50,9 +53,9 @@ def write_dict_to_csv(network):
                 csvwriter.writerow([user, attribute, network[user][attribute]])
 
 def main():
-    retrieve_network(0, api.followers_ids('AllenDowney'))
+    retrieve_network(0, 'AllenDowney')
     print(network)
 
-# main()
+main()
 
 print("Completed!")
