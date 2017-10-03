@@ -44,7 +44,7 @@ def write_dict_to_csv(network):
         csvwriter = csv.writer(csv_file, delimiter='\t')
         for user in network:
             for attribute in network[user]:
-                    csvwriter.writerow([user.encode('utf-8'), attribute.encode('utf-8'), str(network[user][attribute]).encode('utf-8')])
+                    csvwriter.writerow([user, attribute, str(network[user][attribute])])
         csv_file.close()
 
 def read_csv(csv_file):
