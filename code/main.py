@@ -19,25 +19,29 @@ network = {}
 def retrieve_followers(user_id):
     return [api.get_user(follower).screen_name for follower in api.followers_ids(user_id)]
 
+r = retrieve_followers("AllenDowney")
+timeit.timeit(r)
+
 def retrieve_friends(user_id):
     return [api.get_user(friend).screen_name for friend in api.friends_ids(user_id)]
+
+r = retrieve_friends("AllenDowney")
+timeit.timeit(r)
 
 def retrieve_network(n, user_id):
     if n == 6:
         return
     else:
         followers = retrieve_followers(user_id)
-        # print("Followers " + n + " completed")
         friends = retrieve_friends(user_id)
-        # print("Friends " + n + " completed")
 
         if user_id not in network:
-            network[user_id]['followers'] = follower
+            network[user_id]['followers'] = followers
             network[user_id]['friends'] = friends
             for follower in followers:
                 retrieve_network(n + 1, follower)
             for friend in friends:
-                retrieve_network(n + 1, follower)
+                retrieve_network(n + 1, friend)
 
 def write_dict_to_csv(network):
     with open('results.csv', 'wb') as csv_file:
@@ -48,8 +52,8 @@ def write_dict_to_csv(network):
         csv_file.close()
 
 def read_csv(csv_file):
-    # TBE
-    return
+    # to be filled in
+    pass
 
 def main():
     retrieve_network(0, 'AllenDowney')
