@@ -1,0 +1,11 @@
+Facebook vs HK Test Run Results:
+Degrees: 4039 4039
+Clustering: 0.588 0.082
+Path length: 3.689 2.136
+Mean degrees: 43.6910126269 85.274077742
+
+
+Expected Results:
+Clustering: 0.61  >0.037
+Path length: 3.69 2.51
+Mean degrees: 43.7 43.7
