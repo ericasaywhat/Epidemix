@@ -1,4 +1,4 @@
-# How attached are we to Preferetial Attachment?
+# How attached are we to Preferential Attachment?
 
 ### Abstract
 After Barabási and Albert's paper on scale-free networks, Holme and Kim propose an extension of the Barabási Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm for directed and undirected graphs using data from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a lack of preferential attachment in networks.
@@ -26,6 +26,8 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 We also generate some PMF graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. We find that the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are reasonably linear.
 
+![alt text](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs.png "PMF Curves")
+
 
 We investigate an extension to Holme and Kim's work by making it applicable to directed graphs. Holme and Kim's experiment shows that in undirected graphs, an additional "triad formation" step preserves the same scale-free and power-law degree distribution characteristics as Barabási and Albert's graphs, but with additional high-clustering. However, the "triad formation" step as Holme and Kim describe it only applies to undirected graphs because it requires adding random edges between a source and a random neighboring node. This increases clustering and decreases average path lengths in undirected graphs, where the direction of the edge does not matter, but in directed graphs, a randomly added edge between two nodes does not guarantee that clustering increases nor that path length decreases. For example, when User A follows User B on a social media site like Twitter, but User B never follows User A back, there is a connection from User A to User B but not a connection from User B back to User A.
 
@@ -44,12 +46,12 @@ We also explore the Holme and Kim experiment by generating a clustered scale-fre
 
 -----
 # References
-[1] **Holme, Petter, and Beom Jun Kim** "Growing Scale-Free Networks with Tunable Clustering." *Physical Review* E, vol.65, no.2, Nov. 2002, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;doi:10.1103/physreve.65.026107.
+[1] **Holme, Petter, and Beom Jun Kim** "Growing Scale-Free Networks with Tunable Clustering." *Physical Review* E, vol.65, no.2, Nov. 2002, doi:10.1103/physreve.65.026107.
 
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Real social networks have higher levels of clustering than Barabási and Albert's model convey. Holme and Kim observe that often times when one person &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;befriends another, that person also becomes friends with a random friend of that friend. As a result, Holme and Kim add an extension to Barabási and Albert's &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; model that generates triads with a certain probability. With their model, changing the average number of triad formation trials per time step alters the &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;clustering coefficient.
+ Real social networks have higher levels of clustering than Barabási and Albert's model convey. Holme and Kim observe that often times when one person befriends another, that person also becomes friends with a random friend of that friend. As a result, Holme and Kim add an extension to Barabási and Albert's  model that generates triads with a certain probability. With their model, changing the average number of triad formation trials per time step alters the clustering coefficient.
 
 [2]**Downey, Allen**. "Chapter 4: Scale-free Networks" *Think Complexity*. 2nd ed., O'Reilly, 2012, pp.47-65.
 
 [3]**Albert-László Barabási and Réka Albert**."Emergence of Scaling in Random Networks" *Science*. 286, 509 (1999).
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Barabási and Albert observe that a common property of many large networks is that the vertex connectivities follow a scale-free power-law distribution. They &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discover this through the use of graphs; they start with graphs with no edges, i.e., graphs completely composed of random vertices. Then, for every time step, &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; they add a vertex with several edges, where the edges are connected to other vertices based on the principle of preferential attachment (similar to the "rich get  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;richer" principle).
+Barabási and Albert observe that a common property of many large networks is that the vertex connectivities follow a scale-free power-law distribution. They discover this through the use of graphs; they start with graphs with no edges, i.e., graphs completely composed of random vertices. Then, for every time step,  they add a vertex with several edges, where the edges are connected to other vertices based on the principle of preferential attachment (similar to the "rich get  richer" principle).
