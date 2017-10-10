@@ -1,5 +1,7 @@
 # How attached are we to Preferential Attachment?
 
+Erica Lee and Emily Yeh
+
 ### Abstract
 After Barabási and Albert's paper on scale-free networks, Holme and Kim propose an extension of the Barabási Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm for directed and undirected graphs using data from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a lack of preferential attachment in networks.
 
