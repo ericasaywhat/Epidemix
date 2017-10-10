@@ -26,7 +26,7 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 We also generate some PMF graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. We find that the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are reasonably linear.
 
-![alt text](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs.png "PMF Curves")
+![alt text](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs.png "wow so linear")
 
 
 We investigate an extension to Holme and Kim's work by making it applicable to directed graphs. Holme and Kim's experiment shows that in undirected graphs, an additional "triad formation" step preserves the same scale-free and power-law degree distribution characteristics as Barabási and Albert's graphs, but with additional high-clustering. However, the "triad formation" step as Holme and Kim describe it only applies to undirected graphs because it requires adding random edges between a source and a random neighboring node. This increases clustering and decreases average path lengths in undirected graphs, where the direction of the edge does not matter, but in directed graphs, a randomly added edge between two nodes does not guarantee that clustering increases nor that path length decreases. For example, when User A follows User B on a social media site like Twitter, but User B never follows User A back, there is a connection from User A to User B but not a connection from User B back to User A.
