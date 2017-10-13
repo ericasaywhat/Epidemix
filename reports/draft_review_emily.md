@@ -1,5 +1,7 @@
 # A review of "Effects of Defectors on Greedy Routing in Complex Networks"
 
+Emily Yeh
+
 #### _Question:  What is your understanding of the experiment the team is replicating?  What question does it answer?  How clear is the team's explanation?_
 
 It looks like you are replicating a game, in which some nodes have to balance trade-offs from delivering messages - it costs them to send a message, but they are rewarded for sending it successfully, and the behavior of each node can either be random or depend on its neighbors. This seems to answer the question, what is the effect of defectors on greedy routing in complex networks? Which is pretty clearly the point of your project, so good job!
