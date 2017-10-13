@@ -2,7 +2,7 @@
 
 ###### Erica Lee
 
-------
+======
 
 #### What is your understanding of the experiment the team is replicating?  What question does it answer?  How clear is the team's explanation?
 
