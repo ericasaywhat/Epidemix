@@ -2,6 +2,8 @@
 
 ###### Erica Lee
 
+------
+
 #### What is your understanding of the experiment the team is replicating?  What question does it answer?  How clear is the team's explanation?
 
 I was a little confused when reading the abstract what the Kleineberg experiment was. The word “game” is suddenly introduced without much context, but this is all cleared up in the next section. There is a bit of a road map in the abstract that I’m not sure is necessary, where you state each step you took in replicating the Kleineberg game. Overall, however, the paper as a whole is clear in explaining the experiment and results and addresses the question of how changing nodes’ decision to defect affects complex networks such as the internet with greedy routing.
