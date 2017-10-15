@@ -4,8 +4,26 @@ Clustering: 0.588 0.082
 Path length: 3.689 2.136
 Mean degrees: 43.6910126269 85.274077742
 
-
 Expected Results:
-Clustering: 0.61  >0.037
+Clustering: 0.61 >0.037
 Path length: 3.69 2.51
 Mean degrees: 43.7 43.7
+
+
+
+Twitter vs HK-Modified Run Results
+Degrees: 81306 81306
+Clustering: 0.595 0.446
+Path length: 3.889 1.997
+Mean degrees: 33.0187194057 67.9537795489
+
+Expected Results for HK:
+Degrees: 81306
+Clustering: 0.214
+Path length: 3.676
+Mean degrees: 43.98777458
+
+
+
+Twitter vs HK-Modified Directed Run Results
+Mean degrees: 43.4936905025 43.9886355251

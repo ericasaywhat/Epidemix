@@ -40,7 +40,7 @@ def ba_graph(n, k, seed=None):
         targets = _random_subset(repeated_nodes, k)
     return G
 
-def hk_graph(n, m, p, seed=None):
+def hk_graph(n, p, m=2, seed=None):
     """Constructs a Holme-Kim graph.
 
     n: number of nodes
@@ -59,31 +59,13 @@ def hk_graph(n, m, p, seed=None):
     if seed is not None:
         random.seed(seed)
 
-    G = nx.empty_graph(m)
-    repeated_nodes = list(G.nodes())
-    source = m
-    for source in range(m,n):
-        possible_targets = _random_subset(repeated_nodes, m)
-        target = possible_targets.pop()
-        G.add_edge(source, target)
-        repeated_nodes.append(target)
-        count = 1
-        for count in range(1,m):
-            if random.random() < p:
-                neighborhood = [nbr for nbr in G.neighbors(target)
-                                if not G.has_edge(source, nbr)
-                                and not nbr == source]
-                if neighborhood:
-                    nbr = random.choice(neighborhood)
-                    G.add_edge(source, nbr)
-                    repeated_nodes.append(nbr)
-                    count = count + 1
-                    continue
-            target = possible_targets.pop()
-            G.add_edge(source, target)
-            repeated_nodes.append(target)
+    G = nx.empty_graph()
+    G.add_edges_from([(0, 1), (1, 2), (2, 0)])
 
-        repeated_nodes.extend([source] * m)
+    for source in range(m + 1, n):
+        v, w = random.choice(G.edges())
+        G.add_edge(source, v)
+        G.add_edge(source, w)
     return G
 
 def triad_formation(G, v, w):
@@ -129,13 +111,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
     lengths = []
     for pair in pairs:
         if (G.has_edge(pair.item(0), pair.item(1)) | G.has_edge(pair.item(1), pair.item(0))):
-            # print("PING PING")
             lengths.append(nx.shortest_path_length(G, *pair))
-            # lengths.append(nx.shortest_path_length(G, *pair))
-    # lengths = [nx.shortest_path_length(G, *pair)
-    #            for pair in pairs]
-    # if len(lengths) == 0:
-    #     return [0]
     return lengths
 
 def estimate_path_length(G, nodes=None, trials=1000):
@@ -167,7 +143,7 @@ def generate_pmf(fb, hk):
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
-    plt.savefig('PMFGraphs_Original.pdf')
+    plt.savefig('PMFGraphs_Modified.pdf')
 
 def generate_cdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
@@ -178,7 +154,7 @@ def generate_cdf(fb, hk):
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CDF')
 
-    plt.savefig('CDFGraphs_Original.pdf')
+    plt.savefig('CDFGraphs_Modified.pdf')
 
 def generate_ccdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
@@ -189,7 +165,7 @@ def generate_ccdf(fb, hk):
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CCDF', yscale='log')
 
-    plt.savefig("CCDFGraphs_Original.pdf")
+    plt.savefig("CCDFGraphs_Modified.pdf")
 
 def main():
     fb = read_graph('facebook_combined.txt.gz')
@@ -200,7 +176,7 @@ def main():
     m = len(fb.edges())
     k = int(round(m/n))
 
-    hk = hk_graph(n, k, 1)
+    hk = hk_graph(n, 1)
 
     # generate_pmf(fb, hk)
     # generate_cdf(fb, hk)
