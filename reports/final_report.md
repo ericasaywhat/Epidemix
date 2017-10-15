@@ -5,7 +5,7 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm for directed and undirected graphs using data from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a preferential attachment in networks.
+Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a preferential attachment in networks.
 
 ------
 
