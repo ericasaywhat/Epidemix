@@ -11,15 +11,13 @@ Holme and Kim propose an extension of the Barabási-Albert model that yields a h
 
 We replicate Holme and Kim's work using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. Holme and Kim generate graphs using the following steps:
 
-1. Initial condition: In the beginning, the network consists of _m<sub>0</sub>_ vertices and 0 edges.
+1. **Initial condition**: In the beginning, the network consists of _m<sub>0</sub>_ vertices and 0 edges.
 
-2. Growth: One vertex _v_ with _m_ edges gets added with every time step. Time _t_ is the number of time steps.
+2. **Growth**: One vertex _v_ with _m_ edges gets added with every time step. Time _t_ is the number of time steps.
 
-3. Preferential attachment (PA): Each edge of _v_ gets attached to an existing vertex _w_ with a probability proportional to the other vertex's degree.
+3. **Preferential attachment (PA)**: Each edge of _v_ gets attached to an existing vertex _w_ with a probability proportional to the other vertex's degree.
 
-4. Triad formation (TF), Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
-
-Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
+4. **Triad formation (TF)**, Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
 ### Results of Replication
 
@@ -39,28 +37,20 @@ Figure 1 displays the results of our replication. Our replication results are cl
 
 **Figure 1.** Results of replication using Facebook data from SNAP. The results under _Facebook_ and _Holme Kim_ are our results, while the results under _Facebook Expected_ and _Holme Kim Expected_ are results from _Think Complexity_.
 
+Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
+
 We also generate PMF graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks. 
 
-![alt text](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs.png "wow so linear")
+![alt text](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs.png)
 
 **Figure 2.** PMF graphs for our Facebook and Holme Kim results. There is noisiness in both graphs and a curved tail for the Facebook results.
 
-We investigate an extension to Holme and Kim's work by making it applicable to directed graphs. Holme and Kim's experiment shows that in undirected graphs, an additional "triad formation" step preserves the same scale-free and power-law degree distribution characteristics as Barabási and Albert's graphs, but with additional high-clustering. However, the "triad formation" step as Holme and Kim describe it only applies to undirected graphs because it requires adding random edges between a source and a random neighboring node. This increases clustering and decreases average path lengths in undirected graphs, where the direction of the edge does not matter, but in directed graphs, a randomly added edge between two nodes does not guarantee that clustering increases nor that path length decreases. For example, when User A follows User B on a social media site like Twitter, but User B never follows User A back, there is a connection from User A to User B but not a connection from User B back to User A.
+**ANALYZE PMF GRAPHS HERE**
 
-Our goal is to fix the disparity between Holme and Kim's work for undirected versus directed graphs. After successfully replicating Holme and Kim's experiment, we modify our replication such that it is based on directed graphs. The results of our modification of holme and Kim's experiment are displayed in the following table.The results for the clustering coefficient are similar with a difference of only 0.009, but there are significant differences between the path lengths and mean degrees generated by our modification of Holme and Kim's work when compared to the original work. (As a result, this experiment is still in progress, while we try to find and demolish the errors in our ways.)
-
-### Results of Modification
-
-|              | Twitter | Holme Kim Modified | Holme Kim Expected |
-| ---          | ---     | ---                | ---                |
-| Degrees      | 81306   | 81306              | 81306              |
-| Clustering   | 0.082   | 0.223              | 0.214              |
-| Path Length  | 3.889   | 1.997              | 3.676              |
-| Mean Degrees | 33.019  | 67.954             | 43.988             |
 
 **Figure 3.** TBE
 
-We also explore the Holme and Kim experiment by generating a clustered scale-free network without preferential attachment.(This experiment is also in progress though.) Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are two triads as well as two triads in the initial time step. This special case is very similar to the model in which preferential attachment is disregarded.
+We explore the Holme and Kim experiment by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are two triads as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded <sup>2</sup>.
 
 -----
 # References
