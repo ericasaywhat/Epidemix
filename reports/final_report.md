@@ -47,10 +47,7 @@ We also generate PMF graphs to examine the the degree distribution of the graphs
 
 **ANALYZE PMF GRAPHS HERE**
 
-
-**Figure 3.** TBE
-
-We explore the Holme and Kim experiment by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are two triads as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded <sup>2</sup>.
+We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are an average of of two triads per node as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded and replaced with random selection of vertices.<sup>2</sup>
 
 -----
 # References
