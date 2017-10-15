@@ -10,23 +10,23 @@ print("Initializing...")
 
 def degrees(G):
     """List of degrees for nodes in `G`.
-    
+
     G: Graph object
-    
+
     returns: list of int
     """
     return [G.degree(u) for u in G]
 
 def ba_graph(n, k, seed=None):
     """Constructs a BA graph.
-    
+
     n: number of nodes
     k: number of edges for each new node
     seed: random seen
     """
     if seed is not None:
         random.seed(seed)
-    
+
     G = nx.empty_graph(k)
     targets = list(range(k))
     repeated_nodes = []
@@ -40,43 +40,50 @@ def ba_graph(n, k, seed=None):
         targets = _random_subset(repeated_nodes, k)
     return G
 
-def hk_graph(n, p, k, seed=None):
+def hk_graph(n, m, p, seed=None):
     """Constructs a Holme-Kim graph.
-    
+
     n: number of nodes
     p: probability of PA of edge to a given node
     k: number of edges for each new node
     seed: random seen
     """
+
+    if m < 1 or n < m:
+        raise ValueError(
+            "NetworkXError must have m>1 and m<n, m=%d,n=%d" % (m, n))
+
+    if p > 1 or p < 0:
+        raise ValueError(
+            "NetworkXError p must be in [0,1], p=%f" % (p))
     if seed is not None:
         random.seed(seed)
-    
-    G = nx.empty_graph(k)
-    G.add_nodes_from(range(n))
-    targets = list(range(k))
-    repeated_nodes = []
 
-    for v in range(k, n):
-        G.add_edges_from(zip([v] * k, targets))
+    G = nx.empty_graph(m)
+    repeated_nodes = list(G.nodes())
+    source = m
+    for source in range(m,n):
+        possible_targets = _random_subset(repeated_nodes, m)
+        target = possible_targets.pop()
+        G.add_edge(source, target)
+        repeated_nodes.append(target)
+        count = 1
+        for count in range(1,m):
+            if random.random() < p:
+                neighborhood = [nbr for nbr in G.neighbors(target)
+                                if not G.has_edge(source, nbr)
+                                and not nbr == source]
+                if neighborhood:
+                    nbr = random.choice(neighborhood)
+                    G.add_edge(source, nbr)
+                    repeated_nodes.append(nbr)
+                    count = count + 1
+                    continue
+            target = possible_targets.pop()
+            G.add_edge(source, target)
+            repeated_nodes.append(target)
 
-        for w in targets:
-            if (len(G.edges()) == 0):
-                p = 1
-            else:
-                # if G.neighbors(w):
-                p = len(G.neighbors(w)) / len(G.edges())
-                # else:
-                #     p = 0.3
-                # print(p)
-
-            if flip(p):
-                # G.add_edge(v, w)
-                G = triad_formation(G, v, w)
-            
-        repeated_nodes.extend(targets)
-        repeated_nodes.extend([v] * k)
-
-        targets = _random_subset(repeated_nodes, k)
+        repeated_nodes.extend([source] * m)
     return G
 
 def triad_formation(G, v, w):
@@ -91,10 +98,10 @@ def triad_formation(G, v, w):
 
 def _random_subset(repeated_nodes, k):
     """Select a random subset of nodes without repeating.
-    
+
     repeated_nodes: list of nodes
     k: size of set
-    
+
     returns: set of nodes
     """
     targets = set()
@@ -116,7 +123,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
         nodes = G.nodes()
     else:
         nodes = list(nodes)
-        
+
     pairs = np.random.choice(nodes, (trials, 2))
 
     lengths = []
@@ -125,7 +132,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
             # print("PING PING")
             lengths.append(nx.shortest_path_length(G, *pair))
             # lengths.append(nx.shortest_path_length(G, *pair))
-    # lengths = [nx.shortest_path_length(G, *pair) 
+    # lengths = [nx.shortest_path_length(G, *pair)
     #            for pair in pairs]
     # if len(lengths) == 0:
     #     return [0]
@@ -153,7 +160,7 @@ def main():
     m = len(fb.edges())
 
     k = int(round(m/n))
-    hk = hk_graph(n, 1, k)
+    hk = hk_graph(n, k, 1)
     # hk = nx.powerlaw_cluster_graph(n, k, 1.0, seed=15)
 
     ba = ba_graph(n, k)
