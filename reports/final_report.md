@@ -5,7 +5,7 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm for directed and undirected graphs using data from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a preferential attachment in networks.
+Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a preferential attachment in networks.
 
 ------
 
@@ -21,14 +21,14 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 ### Results of Replication
 
-|              | Facebook | Facebook Expected<sup>2</sup> |
+|              | Facebook | Facebook Expected<sup>3/sup> |
 |  ------      |  ------  |  ------                       |
 | Degrees      | 4039     | 4039                          |
 | Clustering   | 0.588    | 0.61                          |
 | Path Length  | 3.689    | 3.69                          |
 | Mean Degrees | 43.691   | 43.7                          |
 
-|              | Holme Kim | Holme Kim Expected<sup>2</sup> |
+|              | Holme Kim | Holme Kim Expected<sup>3</sup> |
 | ---          | ---       | ---                            |
 | Degrees      | 4039      | 4039                           |
 | Clustering   | 0.082     | > 0.037                        |
@@ -47,19 +47,20 @@ We also generate PMF graphs to examine the the degree distribution of the graphs
 
 **ANALYZE PMF GRAPHS HERE**
 
-
-**Figure 3.** TBE
-
-We explore the Holme and Kim experiment by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are two triads as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded <sup>2</sup>.
+We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are an average of of two triads per node as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded and replaced with random selection of vertices.<sup>2</sup>
 
 -----
 # References
 
-[1] **Albert-László Barabási and Réka Albert**."Emergence of Scaling in Random Networks" *Science*. 286, 509 (1999).
+[1] **Albert-László Barabási and Réka Albert**. "Emergence of Scaling in Random Networks." *Science*. 286, 509 (1999).
 
 _Barabási and Albert observe that a common property of many large networks is that the vertex connectivities follow a scale-free power-law distribution. They discover this through the use of graphs; they start with graphs with no edges, i.e., graphs completely composed of random vertices. Then, for every time step,  they add a vertex with several edges, where the edges are connected to other vertices based on the principle of preferential attachment (similar to the "rich get  richer" principle)._
 
-[2] **Downey, Allen**. "Chapter 4: Scale-free Networks" *Think Complexity*. 2nd ed., O'Reilly, 2012, pp.47-65.
+[2] **Dorogovtsev, S. N., Mendes, J. F. F., and Samukhin, A. N.** "Size-dependent degree distribution of a scale-free growing network." _Physical Review_, E, Statistical Physics, Plasmas, Fluids, and Related Interdisciplinary Topics.
+
+_Dorogovtsev et al. explore the effects of replacing the preferential attachment step of generating scale-free networks with purely random selection of vertices. Their process involves generating the simplest model of a scale-free network: starting with three nodes initially, each with connectivity 2, for each time step thereafter, they add another node that is connected to both ends of a randomly chosen link by two undirected links. The preferential linking arises not because of a special rule, as Barabasi-Albert proposed, but completely naturally. They find that the probability of a node being attached to a randomly chosen link is almost the same as the equation Barabasi and Albert came up with - the connectivity k of the node divided by the total number of links, 2t - 1._
+
+[3] **Downey, Allen**. "Chapter 4: Scale-free Networks" *Think Complexity*. 2nd ed., O'Reilly, 2012, pp.47-65.
 
 _Downey explains complexity science using programming examples in Python, data structures and algorithms, and computational modeling. He also puts his experiments and results under philosophical scrutiny, raising questions that relate to philosophy of science. Chapter 4 of his textbook has to do with scale-free networks; Downey replicates the Barabási-Albert (BA) and Watts-Strogatz (WS) models in the context of Facebook data from SNAP and finds that the WS model is not scale-free, whereas the BA model is._
 
