@@ -32,19 +32,28 @@ def hk_ba_graph(n, k, seed=None):
     
     G = nx.empty_graph(k, create_using=nx.DiGraph())
     targets = list(range(k))
-    repeated_nodes = []
+    # repeated_nodes = []
 
     for source in range(k, n):
         G.add_edges_from(zip([source]*k, targets))
 
+# Uniformly randomly choose a node to add edges to
+# Do triad formation on that node after
+# Add PA step function
+
         G.add_edges_from(holme_kim(G, source, targets))
 
-        repeated_nodes.extend(targets)
-        # repeated_nodes.extend([source] * k)
+        """ repeated_nodes.extend(targets)
+        repeated_nodes.extend([source] * k) """
 
-        targets = _random_subset(repeated_nodes, k)
+        # targets = _random_subset(repeated_nodes, k)
+
+        targets = _random_subset(nx.nodes(G), k)
 
     return G
+
+def preferential_attachment(targets):
+    
 
 def _random_subset(repeated_nodes, k):
     """Select a random subset of nodes without repeating.
@@ -102,7 +111,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
     for pair in pairs:
         # print(G.neighbors(pair.item(0)))
         if (G.has_edge(pair.item(0), pair.item(1)) | G.has_edge(pair.item(1), pair.item(0))):
-            print("PING PING MOTHERFUCKER")
+            print("PING PING")
             lengths.append(nx.shortest_path_length(G, *pair))
             lengths.append(nx.shortest_path_length(G.reverse(copy=False), *pair))
     
