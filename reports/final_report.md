@@ -11,13 +11,13 @@ Holme and Kim propose an extension of the Barabási-Albert model that yields a h
 
 We replicate Holme and Kim's work using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. Holme and Kim generate graphs using the following steps:
 
-1. Initial condition: In the beginning, the network consists of _m<sub>0</sub>_ vertices and 0 edges.
+1. **Initial condition**: In the beginning, the network consists of _m<sub>0</sub>_ vertices and 0 edges.
 
-2. Growth: One vertex _v_ with _m_ edges gets added with every time step. Time _t_ is the number of time steps.
+2. **Growth**: One vertex _v_ with _m_ edges gets added with every time step. Time _t_ is the number of time steps.
 
-3. Preferential attachment (PA): Each edge of _v_ gets attached to an existing vertex _w_ with a probability proportional to the other vertex's degree.
+3. **Preferential attachment (PA)**: Each edge of _v_ gets attached to an existing vertex _w_ with a probability proportional to the other vertex's degree.
 
-4. Triad formation (TF), Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
+4. **Triad formation (TF)**, Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
 Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
 
