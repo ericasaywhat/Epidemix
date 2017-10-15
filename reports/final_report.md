@@ -19,7 +19,7 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 4. Triad formation (TF), Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
-Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment, so we believe that we successfully replicated their project.
+Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
 
 ### Results of Replication
 
@@ -34,10 +34,10 @@ Figure 1 displays the results of our replication. Our replication results are cl
 | ---          | ---       | ---                            |
 | Degrees      | 4039      | 4039                           |
 | Clustering   | 0.082     | > 0.037                        |
-| Path Length  | 2.136     | 2.51                           |
+| Path Length  | 2.136     | < 2.51                         |
 | Mean Degrees | 85.274    | > 43.7                         |
 
-**Figure 1.** Results of replication using Facebook data from SNAP. The results under _Facebook_ and _Holme Kim_ are our results, while the results under _Facebook Expected_ and _Holme Kim Expected_ are results from _Think Complexity_. We expect higher values for clustering and mean degrees for our Holme Kim experiment than the results reported under Holme Kim Expected because the results under Holme Kim Expected are results from the Barabási-Albert model.
+**Figure 1.** Results of replication using Facebook data from SNAP. The results under _Facebook_ and _Holme Kim_ are our results, while the results under _Facebook Expected_ and _Holme Kim Expected_ are results from _Think Complexity_.
 
 We also generate PMF graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks. 
 
