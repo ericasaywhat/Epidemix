@@ -48,7 +48,6 @@ def hk_graph(n, m, p, seed=None):
     k: number of edges for each new node
     seed: random seen
     """
-
     if m < 1 or n < m:
         raise ValueError(
             "NetworkXError must have m>1 and m<n, m=%d,n=%d" % (m, n))
@@ -129,13 +128,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
     lengths = []
     for pair in pairs:
         if (G.has_edge(pair.item(0), pair.item(1)) | G.has_edge(pair.item(1), pair.item(0))):
-            # print("PING PING")
             lengths.append(nx.shortest_path_length(G, *pair))
-            # lengths.append(nx.shortest_path_length(G, *pair))
-    # lengths = [nx.shortest_path_length(G, *pair)
-    #            for pair in pairs]
-    # if len(lengths) == 0:
-    #     return [0]
     return lengths
 
 def estimate_path_length(G, nodes=None, trials=1000):
