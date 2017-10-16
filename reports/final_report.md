@@ -21,19 +21,19 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 ### Results of Replication
 
-|              | Facebook | Facebook Expected<sup>3/sup> |
-|  ------      |  ------  |  ------                       |
-| Degrees      | 4039     | 4039                          |
-| Clustering   | 0.588    | 0.61                          |
-| Path Length  | 3.689    | 3.69                          |
-| Mean Degrees | 43.691   | 43.7                          |
+|              | Facebook | Facebook Expected<sup>3/sup>  | Barabási-Albert |
+|  ------      |  ------  |  ------                       | -----           |
+| Degrees      | 4039     | 4039                          | 4039            |
+| Clustering   | 0.588    | 0.61                          | 0.037           |
+| Path Length  | 3.689    | 3.69                          | 2.51            |
+| Mean Degrees | 43.691   | 43.7                          | 43.7            |
 
 |              | Holme Kim | Holme Kim Expected<sup>3</sup> |
 | ---          | ---       | ---                            |
 | Degrees      | 4039      | 4039                           |
-| Clustering   | 0.082     | > 0.037                        |
-| Path Length  | 2.136     | < 2.51                         |
-| Mean Degrees | 85.274    | > 43.7                         |
+| Clustering   | 0.294     | > 0.037                        |
+| Path Length  | 1.0       | < 2.51                         |
+| Mean Degrees | 43.7      | 43.7                           |
 
 **Figure 1.** Results of replication using Facebook data from SNAP. The results under _Facebook_ and _Holme Kim_ are our results, while the results under _Facebook Expected_ and _Holme Kim Expected_ are results from _Think Complexity_.
 
@@ -48,6 +48,15 @@ We also generate PMF graphs to examine the the degree distribution of the graphs
 **ANALYZE PMF GRAPHS HERE**
 
 We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment. Within the Holme and Kim experiment, there is a special case in which the average number of triads formed per time step is one and there are an average of of two triads per node as well as two triads in the initial time step. This special case is supposedly very similar to the model in which preferential attachment is disregarded and replaced with random selection of vertices.<sup>2</sup>
+
+### Results of Modification
+
+|              | Facebook | Holme Kim | 
+|  ------      |  ------  |  ------   |
+| Degrees      | 4039     | 4039      |
+| Clustering   | 0.602    | 0.725     |
+| Path Length  | 1.0      | 1.0       |
+| Mean Degrees | 43.691   | 3.999     |
 
 -----
 # References
