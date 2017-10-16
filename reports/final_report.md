@@ -5,7 +5,7 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX and investigate the effects of a preferential attachment in networks.
+Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX and investigate the effects of a preferential attachment in generating highly clustered scale-free networks.
 
 ------
 
@@ -21,11 +21,11 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 ### Results of Replication
 
-|              | Facebook | Facebook Expected<sup>3/sup>  | Barabási-Albert |
+|              | Facebook | Facebook Expected<sup>3</sup> | Barabási-Albert |
 |  ------      |  ------  |  ------                       | -----           |
 | Nodes        | 4039     | 4039                          | 4039            |
-| Clustering   | 0.588    | 0.61                          | 0.037           |
-| Path Length  | 3.689    | 3.69                          | 2.51            |
+| Clustering   | 0.613    | 0.61                          | 0.037           |
+| Path Length  | 3.696    | 3.69                          | 2.51            |
 | Mean Degrees | 43.691   | 43.7                          | 43.7            |
 
 **Figure 1-1.** Results of replication using Facebook data from SNAP. The results under _Facebook_ are our results, while the results under _Facebook Expected_ and _Barabási-Albert_ are results from _Think Complexity_<sup>(2)</sup>.
@@ -33,9 +33,9 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 |              | Holme-Kim | Holme-Kim Expected<sup>3</sup> |
 | ---          | ---       | ---                            |
 | Nodes        | 4039      | 4039                           |
-| Clustering   | 0.294     | > 0.037                        |
-| Path Length  | 1.0       | < 2.51                         |
-| Mean Degrees | 43.7      | 43.7                           |
+| Clustering   | 0.256     | > 0.037                        |
+| Path Length  | 2.746     | < 2.51                         |
+| Mean Degrees | 43.754    | 43.7                           |
 
 **Figure 1-2.** Results of replication using Facebook data from SNAP. The results under _Holme-Kim_ are our results, while the results under _Holme-Kim Expected_ are results from _Think Complexity_<sup>(2)</sup>.
 
@@ -43,19 +43,19 @@ Figure 1 displays the results of our replication. Our replication results are cl
 
 We also generate probability mass function (PMF) graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks. 
 
-![wow so linear](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
+![wow so linear figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
 **Figure 2.** PMF graphs for our Facebook and Holme Kim results. There is noisiness in both graphs and a curved tail for the Facebook results.
 
 To get a clearer idea of how accurate our results are, we generate cumulative distribution function (CDF) graphs, which are less noisy than PMF graphs and can provide a clearer picture of the shape of a distribution.<sup>3</sup> Figure 3 shows the CDF of the results from our replication of Holme and Kim's experiment overlaid on the degree CDF for the Facebook dataset. 
 
-![wow so not linear](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Original.png)
+![figure 3 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Original.png)
 
 **Figure 3.** CDF graphs for our Facebook and Holme Kim results. The graphs almost align for higher values, but it is difficult to tell how close they really are.
 
 As Figure 3 shows, the CDF for the Holme-Kim replication is clearly different from the CDF for the Facebook dataset, especially for lower degree values, but for higher values, the two curves become more aligned - although how much more is difficult to tell. To determine just how well the CDF graphs align for higher values, we finally generate complementary cumulative distribution function (CCDF) graphs. CCDF graphs are useful because if a distribution really obeys a power law, the CCDF will be a straight line on a log-log scale.
 
-![wow so twisty](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Original.png)
+![figure 4 CCDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Original.png)
 
 **Figure 4.** CCDF graphs for our Facebook and Holme Kim results. The Facebook CCDF is not linear, while the Holme-Kim CCDF is linear enough; the two graphs also align much more clearly.
 
@@ -78,33 +78,33 @@ After implementing our modification, we perform a test by simulating the Faceboo
 |              | Facebook | Holme-Kim | Holme-Kim Modified | 
 |  ------      |  ------  | ------    | ------             |
 | Nodes        | 4039     | 4039      | 4039               |
-| Clustering   | 0.602    | 0.294     | 0.725              |
-| Path Length  | 1.0      | 1.0       | 1.0                |
-| Mean Degrees | 43.691   | 43.7      | 3.999              |
+| Clustering   | 0.575    | 0.256     | 0.751              |
+| Path Length  | 3.655    | 2.746     | 5.698              |
+| Mean Degrees | 43.691   | 43.754    | 3.999              |
 
 **Figure 5.** Results of our modification. The results under _Holme-Kim Modified_ are the results we generate using our updated rules and the results under _Holme-Kim_ are the results from our replication, which are reproduced here to make comparing the values easier.
 
-As Figure 5 shows, the results of our experiment include significantly higher clustering than the results of our replication. This clustering is also much closer to the clustering of the Facebook dataset. We then generate a PMF graph to check whether the PMF of our results is a straight line, as is characteristic of scale-free networks.
+As Figure 5 shows, the results of our experiment include higher clustering than the results of our replication. This clustering is also much closer to the clustering of the Facebook dataset. We then generate a PMF graph to check whether the PMF of our results is a straight line, as is characteristic of scale-free networks.
 
-![wow so linear](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Modified.png)
+![figure 6 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Modified.png)
 
 **Figure 6.** PMF graphs for our Facebook and Holme Kim results. 
 
 Figure 6 shows that the PMF graph of our experiment is straight, although there is noise. We then generate a CDF graph to get a clearer picture of our distribution.
 
-![wow so linear](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Modified.png)
+![figure 7 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Modified.png)
 
 **Figure 7.** CDF graphs for our Facebook and Holme Kim results. 
 
 The two graphs do not align well, as Figure 7 shows, although it is possible that for larger values, the graphs do align. As a last step, we generate CCDF graphs to get a final look at the similarity of the distributions.
 
-![wow so linear](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Modified.png)
+![figure 8 CCDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Modified.png)
 
 **Figure 8.** CCDF graphs for our Facebook and Holme Kim results. 
 
 The two graphs do not align at all in the CCDF graphs in Figure 8. However, the CCDF of our modified Holme-Kim graph is reasonably linear, indicating that we did successfully generate a scale-free network without preferential attachment. This shows that although the PA step is important to the Barabási-Albert model in order to simulate clustering, and both the PA and TF steps are important to the Holme-Kim model in order to simulate more clustering, they are ultimately nonessential. Our simpler model successfully generates a network with higher clustering than either the Barabási-Albert and Holme-Kim models, and it also has the properties of a scale-free network.
 
-We acknowledge that our model is less realistic than the Barabási-Albert and Holme-Kim models, however. In the real world, a person is not likely to find a friendship between two other people and become friends with both of them. For the purposes of modeling and simulation, though, we believe our model is good enough for quickly generating highly clustered and scale-free networks.
+We acknowledge that our model is less realistic than the Barabási-Albert and Holme-Kim models, however. In the real world, a person is not likely to find a friendship between two other people randomly and become friends with both of them. For the purposes of modeling and simulation, though, we believe our model is good enough for quickly generating highly clustered and scale-free networks.
 
 -----
 
