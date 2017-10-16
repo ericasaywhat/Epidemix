@@ -27,3 +27,18 @@ Mean degrees: 43.98777458
 
 Twitter vs HK-Modified Directed Run Results
 Mean degrees: 43.4936905025 43.9886355251
+
+
+FINAL RESULTS
+
+Replicated Results (Facebook HK):
+Degrees: 4039 4039
+Clustering: 0.613 0.256
+Path length: 3.696 2.746
+Mean degrees: 43.6910126269 43.7538994801
+
+Modified Results (Facebook HK):
+Degrees: 4039 4039
+Clustering: 0.575 0.751
+Path length: 3.655 5.698
+Mean degrees: 43.6910126269 3.99851448378

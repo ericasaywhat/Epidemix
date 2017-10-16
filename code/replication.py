@@ -125,10 +125,8 @@ def random_path_lengths(G, nodes=None, trials=1000):
 
     pairs = np.random.choice(nodes, (trials, 2))
 
-    lengths = []
-    for pair in pairs:
-        if (G.has_edge(pair.item(0), pair.item(1)) | G.has_edge(pair.item(1), pair.item(0))):
-            lengths.append(nx.shortest_path_length(G, *pair))
+    lengths = [nx.shortest_path_length(G, *pair) 
+               for pair in pairs]
     return lengths
 
 def estimate_path_length(G, nodes=None, trials=1000):
