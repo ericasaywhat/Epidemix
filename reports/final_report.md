@@ -5,7 +5,7 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP) and the Python library, NetworkX and investigate the effects of a preferential attachment in networks.
+Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX and investigate the effects of a preferential attachment in networks.
 
 ------
 
@@ -63,7 +63,7 @@ Figure 4 shows that the CCDF graph of our Holme-Kim replication matches the CCDF
 
 ------
 
-We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment and triad formation. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded and replaced with random selection of edges.<sup>2</sup> We therefore replace the original procedure with a modified one:
+We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment and triad formation. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded and replaced with random selection of edges.<sup>4</sup> We therefore replace the original procedure with a modified one:
 
 1. **Initial condition**: In the beginning, the network consists of 3 vertices that are all connected to each other, so each vertex has a degree of 2.
 
@@ -122,6 +122,10 @@ _Dorogovtsev et al. explore the effects of replacing the preferential attachment
 
 _Downey explains complexity science using programming examples in Python, data structures and algorithms, and computational modeling. He also puts his experiments and results under philosophical scrutiny, raising questions that relate to philosophy of science. Chapter 4 of his textbook has to do with scale-free networks; Downey replicates the Barabási-Albert (BA) and Watts-Strogatz (WS) models in the context of Facebook data from SNAP and finds that the WS model is not scale-free, whereas the BA model is._
 
-[3] **Holme, Petter, and Beom Jun Kim** "Growing Scale-Free Networks with Tunable Clustering." *Physical Review* E, vol.65, no.2, Nov. 2002, doi:10.1103/physreve.65.026107.
+[4] **Holme, Petter and Beom Jun Kim** "Growing Scale-Free Networks with Tunable Clustering." *Physical Review* E, vol.65, no.2, Nov. 2002, doi:10.1103/physreve.65.026107.
 
 _Real social networks have higher levels of clustering than Barabási and Albert's model convey. Holme and Kim observe that often times when one person befriends another, that person also becomes friends with a random friend of that friend. As a result, Holme and Kim add an extension to Barabási and Albert's  model that generates triads with a certain probability. With their model, changing the average number of triad formation trials per time step alters the clustering coefficient._
+
+[5] **Leskovec, Jure and Krevl, Andrej.** "SNAP Datasets: Stanford Large Network Dataset Collection." _http://snap.stanford.edu/data_, June 2014.
+
+_A collection of datasets, tools, and libraries. The datasets are mined from various websites._
