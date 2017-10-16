@@ -131,17 +131,21 @@ def generate_pmf(fb, hk):
 
     thinkplot.preplot(cols=2)
 
+    thinkplot.plot([20, 1000], [5e-2, 2e-4], color='gray', linestyle='dashed')
+
     thinkplot.Pdf(pmf_fb, style='.', label='Facebook')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
     thinkplot.subplot(2)
 
+    thinkplot.plot([6, 150], [5e-1, 2e-4], color='gray', linestyle='dashed')
+
     thinkplot.Pdf(pmf_hk, style='.', label='HK graph')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
-    plt.savefig('PMFGraphs_Modified.pdf')
+    plt.savefig('PMFGraphs_Modified.png')
 
 def generate_cdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
@@ -175,9 +179,6 @@ def main():
     k = int(round(m/n))
 
     hk = hk_graph(n, 1)
-
-    ba = ba_graph(n, k)
-
 
     # generate_pmf(fb, hk)
     # generate_cdf(fb, hk)
