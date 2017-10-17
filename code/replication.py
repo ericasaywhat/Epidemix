@@ -4,6 +4,7 @@ import numpy as np
 import random
 import thinkplot
 from thinkstats2 import Cdf, Pmf
+from scipy.stats import linregress
 from networkx.algorithms.approximation import average_clustering
 
 print("Initializing...")
@@ -44,6 +45,7 @@ def hk_graph(n, m, p, seed=None):
     """Constructs a Holme-Kim graph.
 
     n: number of nodes
+    m: 
     p: probability of PA of edge to a given node
     m: number of edges for each new node
     seed: random seen
@@ -148,17 +150,21 @@ def generate_pmf(fb, hk):
 
     thinkplot.preplot(cols=2)
 
+    thinkplot.plot([30, 2000], [5e-2, 2e-4], color='gray', linestyle='dashed')
+
     thinkplot.Pdf(pmf_fb, style='.', label='Facebook')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
     thinkplot.subplot(2)
 
+    thinkplot.plot([55, 500], [5e-2, 2e-4], color='gray', linestyle='dashed')
+
     thinkplot.Pdf(pmf_hk, style='.', label='HK graph')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
-    plt.savefig('PMFGraphs_Original.pdf')
+    plt.savefig('PMFGraphs_Original.png')
 
 def generate_cdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
@@ -169,7 +175,7 @@ def generate_cdf(fb, hk):
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CDF')
 
-    plt.savefig('CDFGraphs_Original.pdf')
+    plt.savefig('CDFGraphs_Original.png')
 
 def generate_ccdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
