@@ -1,15 +1,17 @@
-# How Attached Are We to Preferential Attachment?
+# Detaching Preferential Attachment
 
 Erica Lee and Emily Yeh
 
 ------
 
 ### Abstract
-Holme and Kim propose a model of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, based off their observations of how social interactions take place. We explore Holme and Kim's algorithm using the Python library, NetworkX, with data from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX. The world, however, consists of scale-free networks beyond social networks with preferential attachment, such as neighborhood establishment. When establishing neighborhoods, each new neighborhood would want paths to the closest two neighborhoods. To the establishment of neighborhoods, we generate networks without preferential attachment.
+Holme and Kim propose a model based on Barabási and Albert's that yields a higher level of clustering and simulates the dynamics of social networks more accurately. We explore Holme and Kim's algorithm using data from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX. The world consists of scale-free networks beyond social networks with preferential attachment, such as the process of establishing towns. When new towns are built, each new town needs to be accessible by at least two other towns without preference to the sizes or connectedness of the towns. To simulate the establishment of these towns, we generate networks without preferential attachment and find that the results are still scale-free and highly clustered.
 
 ------
 
-We replicate Holme and Kim's work using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. We replicate Holme-Kim's method:
+### Replicating Holme and Kim's Experiment
+
+We replicate Holme and Kim's experiment using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. We replicate Holme-Kim's method:
 
 1. **Initial condition**: In the beginning, the network consists of _m<sub>0</sub>_ vertices, where m is the average number of triad formation trials per time step, and 0 edges.
 
@@ -19,7 +21,7 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 4. **Triad formation (TF)**, Holme and Kim's modification of the Barabási-Albert model: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
-### Results of Replication
+### Replication Results
 
 |              | Facebook | Facebook Expected<sup>3</sup> | Barabási-Albert |
 |  ------      |  ------  |  ------                       | -----           |
@@ -34,16 +36,16 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 | ---          | ---       | ---                            |
 | Nodes        | 4039      | 4039                           |
 | Clustering   | 0.256     | > 0.037                        |
-| Path Length  | 2.746     | < 2.51                         |
+| Path Length  | 2.746     | 2.51                           |
 | Mean Degrees | 43.754    | 43.7                           |
 
-**Figure 1-2.** Results of replication using Facebook data from SNAP. The results under _Holme-Kim_ are our results, while the results under _Holme-Kim Expected_ are results from _Think Complexity_<sup>(2)</sup>.
+**Figure 1-2.** Figure 1-2. Results of replication using Facebook data from SNAP. The results under _Holme-Kim_ are our results, while the results under _Holme-Kim Expected_ are what we expect for the Holme-Kim model based on _Think Complexity's_<sup>(2)</sup> results of the Barabási-Albert model of SNAP's Facebook dataset. The Holme-Kim model should have a higher clustering value than the Barabási-Albert model.
 
-Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme-Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
+Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect and confirm a higher value for clustering for our Holme-Kim experiment than for the results under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering.
 
-We also generate probability mass function (PMF) graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks.
+We also generate probability mass function (PMF) graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, proving that the distributions of degrees of these graphs obey a power law and indicating that these are scale-free networks.
 
-![wow so linear figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
+![figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
 **Figure 2.** PMF graphs for our Facebook and Holme Kim results. For higher values, there is more noise in both graphs and a curved tail for the Facebook results.
 
@@ -63,7 +65,7 @@ Figure 4 shows that the CCDF graph of our Holme-Kim replication matches the CCDF
 
 ### Detaching Preferential Attachment
 
-We extend Holme and Kim's "triad formation" to generating a clustered scale-free network without preferential attachment. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded.<sup>4</sup> We modify and optimize the procedure to:
+We extend Holme and Kim's "triad formation" to generating a clustered scale-free network without preferential attachment. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of 2 triads per node as well as 2 triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded.<sup>4</sup> We modify and optimize the procedure to:
 
 1. **Initial condition**: In the beginning, the network consists of 3 vertices that are all connected to each other, so each vertex has a degree of 2.
 
@@ -73,14 +75,14 @@ We extend Holme and Kim's "triad formation" to generating a clustered scale-free
 
 We generate a network of the same size as our Holme-Kim replication, as shown in Figure 5.
 
-### Results of Modification
+### Modification Results
 
-|              | Holme-Kim | Modified           |
-|  ------      | ------    | ------             |
-| Nodes        | 4039      | 4039               |
-| Clustering   | 0.256     | 0.751              |
-| Path Length  | 2.746     | 5.698              |
-| Mean Degrees | 43.754    | 3.999              |
+|              | Modified | Holme-Kim |
+|  ------      | ------   | ------    |
+| Nodes        | 4039     | 4039      |
+| Clustering   | 0.751    | 0.256     |
+| Path Length  | 5.698    | 2.746     |
+| Mean Degrees | 3.999    | 43.754    |
 
 **Figure 5.** Results of our modification. The results under _Modified_ are the results we generate without preferential attachment and the results under _Holme-Kim_ are the results from our replication, which are reproduced here to make comparing the values easier.
 
@@ -103,6 +105,10 @@ The two graphs do not align well, as Figure 7 shows, although it is possible tha
 **Figure 8.** CCDF graphs for our Facebook and Holme Kim results.
 
 The two graphs do not align at all in the CCDF graphs in Figure 8. However, the CCDF of our modified Holme-Kim graph is reasonably linear, indicating that we did successfully generate a scale-free network without preferential attachment. While the PA step is important for the Barabási-Albert model to simulate social networks, and both the PA and TF steps are important for the Holme-Kim model to simulate a more realistic social network, the PA step is not necessary in generating scale-free networks in which existing paths don't matter.
+
+In conclusion, we implement and confirm Holme and Kim's proposal that including triad formations on the Barabási-Albert method of generating networks yields a network with clustering coefficients closer to those of real networks, like Facebook. However, we also find that scale-free networks can still be generated for networks in which preferential attachment does not exist, such as our town establishment model. In removing preferential attachment, we find that our town model is still scale-free.
+
+The clustering of our town model is higher than that of the Holme-Kim model, indicating that the network of towns we generate is more clustered than a Facebook network. This Facebook data, however, only contains data for 4039 users. Therefore, this indication may not be wholly accurate.
 
 -----
 
