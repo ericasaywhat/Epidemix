@@ -5,13 +5,13 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose an extension of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, including their observations of how social interactions took place. We explore Holme and Kim's algorithm from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX and investigate the effects of a preferential attachment in generating highly clustered scale-free networks.
+Holme and Kim propose a model of the Barabási-Albert model that yields a higher level of clustering to simulate social networks more accurately, based off their observations of how social interactions take place. We explore Holme and Kim's algorithm using the Python library, NetworkX, with data from Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX. The world, however, consists of scale-free networks beyond social networks with preferential attachment, such as neighborhood establishment. When establishing neighborhoods, each new neighborhood would want paths to the closest two neighborhoods. To the establishment of neighborhoods, we generate networks without preferential attachment.
 
 ------
 
-We replicate Holme and Kim's work using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. Holme and Kim generate graphs using the following steps:
+We replicate Holme and Kim's work using Facebook network data from SNAP and confirm a higher clustering coefficient and shorter average path lengths between nodes using Holme and Kim's algorithm than using Barabási and Albert's. We replicate Holme-Kim's method:
 
-1. **Initial condition**: In the beginning, the network consists of _m<sub>0</sub>_ vertices and 0 edges.
+1. **Initial condition**: In the beginning, the network consists of _m<sub>0</sub>_ vertices, where m is the average number of triad formation trials per time step, and 0 edges.
 
 2. **Growth**: One vertex _v_ with _m_ edges gets added with every time step. Time _t_ is the number of time steps.
 
@@ -41,13 +41,13 @@ We replicate Holme and Kim's work using Facebook network data from SNAP and conf
 
 Figure 1 displays the results of our replication. Our replication results are close to the results from Holme and Kim's experiment. We expect higher values for clustering and mean degrees for our Holme-Kim experiment than the results we display under _Holme Kim Expected_ because the results under _Holme Kim Expected_ are results from the Barabási-Albert model, which Holme and Kim change to yield higher clustering and shorter path lengths in their experiment.
 
-We also generate probability mass function (PMF) graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks. 
+We also generate probability mass function (PMF) graphs to examine the the degree distribution of the graphs we generate for the Facebook data and the graphs Holme and Kim's experiment generate. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, proving that the distributions of degrees of these graphs obey a power law, indicating that these are scale-free networks.
 
 ![wow so linear figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
-**Figure 2.** PMF graphs for our Facebook and Holme Kim results. There is noisiness in both graphs and a curved tail for the Facebook results.
+**Figure 2.** PMF graphs for our Facebook and Holme Kim results. For higher values, there is more noise in both graphs and a curved tail for the Facebook results.
 
-To get a clearer idea of how accurate our results are, we generate cumulative distribution function (CDF) graphs, which are less noisy than PMF graphs and can provide a clearer picture of the shape of a distribution.<sup>3</sup> Figure 3 shows the CDF of the results from our replication of Holme and Kim's experiment overlaid on the degree CDF for the Facebook dataset. 
+To get a clearer idea of how accurate our results are, we generate cumulative distribution function (CDF) graphs, which are less noisy than PMF graphs and can provide a clearer picture of the shape of a distribution.<sup>3</sup> Figure 3 shows the CDF of the results from our replication of Holme and Kim's experiment overlaid on the degree CDF for the Facebook dataset.
 
 ![figure 3 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Original.png)
 
@@ -63,7 +63,7 @@ Figure 4 shows that the CCDF graph of our Holme-Kim replication matches the CCDF
 
 ------
 
-We explore the Holme and Kim experiment further by generating a clustered scale-free network without preferential attachment and triad formation. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded and replaced with random selection of edges.<sup>4</sup> We therefore replace the original procedure with a modified one:
+We extend Holme and Kim's "triad formation" to generating a clustered scale-free network without preferential attachment. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded.<sup>4</sup> We modify and optimize the procedure to:
 
 1. **Initial condition**: In the beginning, the network consists of 3 vertices that are all connected to each other, so each vertex has a degree of 2.
 
@@ -71,40 +71,38 @@ We explore the Holme and Kim experiment further by generating a clustered scale-
 
 3. **Random edge selection**: Select a random existing edge and connect _v_ to both vertices of the edge.
 
-After implementing our modification, we perform a test by simulating the Facebook dataset. After the initial condition step, we insert the same number of nodes as there are in the Facebook dataset following the rules above and observe the results.
+We generate a network of the same size as our Holme-Kim replication, as shown in Figure 5.
 
 ### Results of Modification
 
-|              | Facebook | Holme-Kim | Holme-Kim Modified | 
-|  ------      |  ------  | ------    | ------             |
-| Nodes        | 4039     | 4039      | 4039               |
-| Clustering   | 0.575    | 0.256     | 0.751              |
-| Path Length  | 3.655    | 2.746     | 5.698              |
-| Mean Degrees | 43.691   | 43.754    | 3.999              |
+|              | Holme-Kim | Modified           |
+|  ------      | ------    | ------             |
+| Nodes        | 4039      | 4039               |
+| Clustering   | 0.256     | 0.751              |
+| Path Length  | 2.746     | 5.698              |
+| Mean Degrees | 43.754    | 3.999              |
 
-**Figure 5.** Results of our modification. The results under _Holme-Kim Modified_ are the results we generate using our updated rules and the results under _Holme-Kim_ are the results from our replication, which are reproduced here to make comparing the values easier.
+**Figure 5.** Results of our modification. The results under _Modified_ are the results we generate without preferential attachment and the results under _Holme-Kim_ are the results from our replication, which are reproduced here to make comparing the values easier.
 
-As Figure 5 shows, the results of our experiment include higher clustering than the results of our replication. This clustering is also much closer to the clustering of the Facebook dataset. We then generate a PMF graph to check whether the PMF of our results is a straight line, as is characteristic of scale-free networks.
+As Figure 5 shows, the results of our experiment shows higher clustering than our replication.
 
 ![figure 6 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Modified.png)
 
-**Figure 6.** PMF graphs for our Facebook and Holme Kim results. 
+**Figure 6.** PMF graphs for our Facebook and Holme Kim results.
 
-Figure 6 shows that the PMF graph of our experiment is straight, although there is noise. We then generate a CDF graph to get a clearer picture of our distribution.
+From the PMF graph's linearity shown in Figure 6, our neighborhood network is a scale-free network. We then generate a CDF graph to get a clearer picture of our distribution.
 
 ![figure 7 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Modified.png)
 
-**Figure 7.** CDF graphs for our Facebook and Holme Kim results. 
+**Figure 7.** CDF graphs for our Facebook and Holme Kim results.
 
 The two graphs do not align well, as Figure 7 shows, although it is possible that for larger values, the graphs do align. As a last step, we generate CCDF graphs to get a final look at the similarity of the distributions.
 
 ![figure 8 CCDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Modified.png)
 
-**Figure 8.** CCDF graphs for our Facebook and Holme Kim results. 
+**Figure 8.** CCDF graphs for our Facebook and Holme Kim results.
 
-The two graphs do not align at all in the CCDF graphs in Figure 8. However, the CCDF of our modified Holme-Kim graph is reasonably linear, indicating that we did successfully generate a scale-free network without preferential attachment. This shows that although the PA step is important to the Barabási-Albert model in order to simulate clustering, and both the PA and TF steps are important to the Holme-Kim model in order to simulate more clustering, they are ultimately nonessential. Our simpler model successfully generates a network with higher clustering than either the Barabási-Albert and Holme-Kim models, and it also has the properties of a scale-free network.
-
-We acknowledge that our model is less realistic than the Barabási-Albert and Holme-Kim models, however. In the real world, a person is not likely to find a friendship between two other people randomly and become friends with both of them. For the purposes of modeling and simulation, though, we believe our model is good enough for quickly generating highly clustered and scale-free networks.
+The two graphs do not align at all in the CCDF graphs in Figure 8. However, the CCDF of our modified Holme-Kim graph is reasonably linear, indicating that we did successfully generate a scale-free network without preferential attachment. While the PA step is important for the Barabási-Albert model to simulate social networks, and both the PA and TF steps are important for the Holme-Kim model to simulate a more realistic social network, the PA step is not necessary in generating scale-free networks in which existing paths don't matter.
 
 -----
 
@@ -116,7 +114,7 @@ _Barabási and Albert observe that a common property of many large networks is t
 
 [2] **Dorogovtsev, S. N., Mendes, J. F. F., and Samukhin, A. N.** "Size-dependent degree distribution of a scale-free growing network." _Physical Review_, E, Statistical Physics, Plasmas, Fluids, and Related Interdisciplinary Topics.
 
-_Dorogovtsev et al. explore the effects of replacing the preferential attachment step of generating scale-free networks with purely random selection of vertices. Their process involves generating the simplest model of a scale-free network: starting with three nodes initially, each with connectivity 2, for each time step thereafter, they add another node that is connected to both ends of a randomly chosen link by two undirected links. The preferential linking arises not because of a special rule, as Barabasi-Albert proposed, but completely naturally. They find that the probability of a node being attached to a randomly chosen link is almost the same as the equation Barabasi and Albert came up with - the connectivity k of the node divided by the total number of links, 2t - 1._
+_Dorogovtsev et al. explore the effects of replacing the preferential attachment step of generating scale-free networks with purely random selection of vertices. Their process involves generating the simplest model of a scale-free network: starting with three nodes initially, each with connectivity 2, for each time step thereafter, they add another node that is connected to both ends of a randomly chosen link by two undirected links. The preferential linking arises not because of a special rule, as Barabási-Albert proposed, but completely naturally. They find that the probability of a node being attached to a randomly chosen link is almost the same as the equation Barabási and Albert came up with - the connectivity k of the node divided by the total number of links, 2t - 1._
 
 [3] **Downey, Allen**. "Chapter 4: Scale-free Networks" *Think Complexity*. 2nd ed., O'Reilly, 2012, pp.47-65.
 

@@ -45,7 +45,7 @@ def hk_graph(n, m, p, seed=None):
 
     n: number of nodes
     p: probability of PA of edge to a given node
-    k: number of edges for each new node
+    m: number of edges for each new node
     seed: random seen
     """
     if m < 1 or n < m:
@@ -125,7 +125,7 @@ def random_path_lengths(G, nodes=None, trials=1000):
 
     pairs = np.random.choice(nodes, (trials, 2))
 
-    lengths = [nx.shortest_path_length(G, *pair) 
+    lengths = [nx.shortest_path_length(G, *pair)
                for pair in pairs]
     return lengths
 
