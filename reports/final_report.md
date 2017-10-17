@@ -1,4 +1,4 @@
-# Detaching Preferential Attachment
+# How Attached Are We to Preferential Attachment?
 
 Erica Lee and Emily Yeh
 
