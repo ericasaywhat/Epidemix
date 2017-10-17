@@ -17,30 +17,7 @@ def degrees(G):
     """
     return [G.degree(u) for u in G]
 
-def ba_graph(n, k, seed=None):
-    """Constructs a BA graph.
-
-    n: number of nodes
-    k: number of edges for each new node
-    seed: random seen
-    """
-    if seed is not None:
-        random.seed(seed)
-
-    G = nx.empty_graph(k)
-    targets = list(range(k))
-    repeated_nodes = []
-
-    for source in range(k, n):
-        G.add_edges_from(zip([source]*k, targets))
-
-        repeated_nodes.extend(targets)
-        repeated_nodes.extend([source] * k)
-
-        targets = _random_subset(repeated_nodes, k)
-    return G
-
-def hk_graph(n, p, m=2, seed=None):
+def hk_graph_modified(n, p, m=2, seed=None):
     """Constructs a Holme-Kim graph.
 
     n: number of nodes
@@ -129,19 +106,9 @@ def generate_pmf(fb, hk):
     pmf_fb = Pmf(degrees(fb))
     pmf_hk = Pmf(degrees(hk))
 
-    thinkplot.preplot(cols=2)
-
-    thinkplot.plot([20, 1000], [5e-2, 2e-4], color='gray', linestyle='dashed')
-
-    thinkplot.Pdf(pmf_fb, style='.', label='Facebook')
-    thinkplot.config(xscale='log', yscale='log',
-      xlabel='degree', ylabel='PMF')
-
-    thinkplot.subplot(2)
-
     thinkplot.plot([6, 150], [5e-1, 2e-4], color='gray', linestyle='dashed')
 
-    thinkplot.Pdf(pmf_hk, style='.', label='HK graph')
+    thinkplot.Pdf(pmf_hk, style='.', label='Modified graph')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
@@ -152,22 +119,22 @@ def generate_cdf(fb, hk):
     cdf_hk = Cdf(degrees(hk))
 
     thinkplot.Cdf(cdf_fb, color='gray', label="Facebook CDF")
-    thinkplot.Cdf(cdf_hk, label='HK CDF')
+    thinkplot.Cdf(cdf_hk, label='Modified CDF')
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CDF')
 
-    plt.savefig('CDFGraphs_Modified.pdf')
+    plt.savefig('CDFGraphs_Modified.png')
 
 def generate_ccdf(fb, hk):
     cdf_fb = Cdf(degrees(fb))
     cdf_hk = Cdf(degrees(hk))
 
     thinkplot.Cdf(cdf_fb, label='Facebook CCDF', color='gray', complement=True)
-    thinkplot.Cdf(cdf_hk, label="HK CCDF", complement=True)
+    thinkplot.Cdf(cdf_hk, label="Modified CCDF", complement=True)
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CCDF', yscale='log')
 
-    plt.savefig("CCDFGraphs_Modified.pdf")
+    plt.savefig("CCDFGraphs_Modified.png")
 
 def main():
     fb = read_graph('facebook_combined.txt.gz')
@@ -178,11 +145,11 @@ def main():
     m = len(fb.edges())
     k = int(round(m/n))
 
-    hk = hk_graph(n, 1)
+    hk = hk_graph_modified(n, 1)
 
     # generate_pmf(fb, hk)
     # generate_cdf(fb, hk)
-    # generate_ccdf(fb, hk)
+    generate_ccdf(fb, hk)
 
     print("Degrees:", len(degrees(fb)), len(degrees(hk)))
     print("Clustering:", fb_clustering, average_clustering(hk))
