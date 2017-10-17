@@ -61,7 +61,7 @@ As Figure 3 shows, the CDF for the Holme-Kim replication is clearly different fr
 
 Figure 4 shows that the CCDF graph of our Holme-Kim replication matches the CCDF graph of the Facebook dataset well. The CCDF of the Holme-Kim replication is also almost a straight line, meaning the distribution obeys a power law, which is a characteristic of scale-free networks.
 
-------
+### Detaching Preferential Attachment
 
 We extend Holme and Kim's "triad formation" to generating a clustered scale-free network without preferential attachment. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of two triads per node as well as two triads in the initial time step. This special case is similar to a model in which preferential attachment is disregarded.<sup>4</sup> We modify and optimize the procedure to:
 
