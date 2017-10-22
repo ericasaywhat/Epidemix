@@ -27,8 +27,6 @@ We then implement the additional step in the HK model:
 
 4. **Triad formation (TF)**: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
-### Replication Results
-
 |              | Facebook | Facebook Expected<sup>3</sup> | Barabási-Albert |
 |  ------      |  ------  |  ------                       | -----           |
 | Nodes        | 4039     | 4039                          | 4039            |
@@ -81,8 +79,6 @@ In order to produce scale-free, clustered networks without preferential attachme
 3. **Random edge selection**: Select a random existing edge and connect _v_ to both vertices of the edge.
 
 We generate a network with removed preferential attachment, the RPA model, of the same size as our Holme-Kim replication, as shown in Figure 5.
-
-### Modification Results
 
 |              | RPA      | Holme-Kim |
 |  ------      | ------   | ------    |
