@@ -108,7 +108,7 @@ def generate_pmf(fb, hk):
 
     thinkplot.plot([6, 150], [5e-1, 2e-4], color='gray', linestyle='dashed')
 
-    thinkplot.Pdf(pmf_hk, style='.', label='Modified graph')
+    thinkplot.Pdf(pmf_hk, style='.', label='RPA')
     thinkplot.config(xscale='log', yscale='log',
       xlabel='degree', ylabel='PMF')
 
@@ -119,7 +119,7 @@ def generate_cdf(fb, hk):
     cdf_hk = Cdf(degrees(hk))
 
     thinkplot.Cdf(cdf_fb, color='gray', label="Facebook CDF")
-    thinkplot.Cdf(cdf_hk, label='Modified CDF')
+    thinkplot.Cdf(cdf_hk, label='RPA CDF')
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CDF')
 
@@ -130,7 +130,7 @@ def generate_ccdf(fb, hk):
     cdf_hk = Cdf(degrees(hk))
 
     thinkplot.Cdf(cdf_fb, label='Facebook CCDF', color='gray', complement=True)
-    thinkplot.Cdf(cdf_hk, label="Modified CCDF", complement=True)
+    thinkplot.Cdf(cdf_hk, label="RPA CCDF", complement=True)
     thinkplot.config(xlabel='degree', xscale='log',
                  ylabel='CCDF', yscale='log')
 

@@ -199,7 +199,7 @@ def main():
 
     hk = hk_graph(n, k, 1)
 
-    # generate_pmf(fb, hk)
+    generate_pmf(fb, hk)
     # generate_cdf(fb, hk)
     # generate_ccdf(fb, hk)
 
