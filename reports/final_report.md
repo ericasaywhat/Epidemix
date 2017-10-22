@@ -1,4 +1,4 @@
-# How Attached Are We to Preferential Attachment?
+# Clustered Scale-Free Networks without Preferential Attachment
 
 Erica Lee and Emily Yeh
 
