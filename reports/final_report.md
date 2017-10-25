@@ -5,11 +5,11 @@ Erica Lee and Emily Yeh
 ------
 
 ### Abstract
-Holme and Kim propose a model, the HK model, based on Barabási and Albert's, BA model, that yields a higher level of clustering. We explore Holme and Kim's algorithm using data from the Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX. We generate networks without preferential attachment and find that the results are still scale-free and highly clustered.
+Holme and Kim propose a model, the HK model, based on Barabási and Albert's, the BA model, that yields a higher level of clustering. We explore Holme and Kim's algorithm using data from the Stanford Network Analysis Project (SNAP)<sup>5</sup> and the Python library NetworkX. We generate networks without preferential attachment and find that the results are still scale-free and highly clustered.
 
 ------
 ### Introduction
-What characteristics of simulated networks represent real-world social networks? Many simulated networks are scale-free to simulate the behaviour of social networks, regardless of size. They also include the clustering behavior fundamental to social networks, where clustering is a measure of how connected a subset of nodes is. Barabási and Albert are the first to simulate a scale-free social network using preferential attachment. Preferential attachment is the concept in which nodes with higher degrees have a higher probability of connecting to new nodes. The BA model exhibits scale-free behavior, but its clustering coefficient is not as high as a real-world social network's. Holme and Kim introduce triad formation to the BA model, operating under their observation that when one person becomes friends with another, they also become friends with the friends of the other person.
+What characteristics of simulated networks are present in real-world social networks? Scientists trying to simulate social networks might choose to design their simulated networks to be scale-free so that they are applicable to any social network, regardless of its size. They might also design them to include the clustering behavior that is fundamental to social networks, where clustering is a measure of how connected a subset of nodes is. With the BA model, Barabási and Albert create a scale-free network using preferential attachment, which is when new nodes have a higher probability, or preference, of connecting to other nodes that already have high degrees. The BA model exhibits scale-free behavior, but its clustering coefficient is too low to represent a real-world social network. With the HK model, Holme and Kim introduce triad formation as an additional step to the BA model. This is because they observe that when one person in the real world becomes friends with another, they sometimes also become friends with the friends of the other person, thereby forming triads.
 
 ### Replicating Holme and Kim's Experiment
 
@@ -27,27 +27,27 @@ We then implement the additional step in the HK model:
 
 4. **Triad formation (TF)**: If an edge was added in the previous PA step, add one more edge from _v_ to a randomly-selected neighbor of _w_. If there remains no other pair to connect (all neighbors of _w_ are already connected to _v_), do another PA step instead.
 
-|              | Facebook | Facebook Expected<sup>3</sup> | Barabási-Albert |
-|  ------      |  ------  |  ------                       | -----           |
-| Nodes        | 4039     | 4039                          | 4039            |
-| Clustering   | 0.613    | 0.61                          | 0.037           |
-| Path Length  | 3.696    | 3.69                          | 2.51            |
-| Mean Degrees | 43.691   | 43.7                          | 43.7            |
+|              | Facebook | Facebook Expected<sup>3</sup> | BA    |
+|  ------      |  ------  |  ------                       | ----- |
+| Nodes        | 4039     | 4039                          | 4039  |
+| Clustering   | 0.613    | 0.61                          | 0.037 |
+| Path Length  | 3.696    | 3.69                          | 2.51  |
+| Mean Degrees | 43.691   | 43.7                          | 43.7  |
 
-**Figure 1-1.** Results Facebook data from SNAP. The results under _Facebook_ are our results, while the results under _Facebook Expected_ and _Barabási-Albert_ are results from _Think Complexity_<sup>(2)</sup>.
+**Figure 1-1.** *Results we generate using data from SNAP. The results under "Facebook" are our results, while the results under "Facebook Expected" and "BA" are results from* Think Complexity.
 
-|              | Holme-Kim | Holme-Kim Expected<sup>3</sup> |
-| ---          | ---       | ---                            |
-| Nodes        | 4039      | 4039                           |
-| Clustering   | 0.256     | > 0.037                        |
-| Path Length  | 2.746     | 2.51                           |
-| Mean Degrees | 43.754    | 43.7                           |
+|              | HK        | HK Expected<sup>3</sup> |
+| ---          | ---       | ---                     |
+| Nodes        | 4039      | 4039                    |
+| Clustering   | 0.256     | > 0.037                 |
+| Path Length  | 2.746     | 2.51                    |
+| Mean Degrees | 43.754    | 43.7                    |
 
-**Figure 1-2.** Results using Facebook data from SNAP. The results under _Holme-Kim_ are our results, while the results under _Holme-Kim Expected_ are what we expect for the Holme-Kim model based on _Think Complexity's_<sup>(2)</sup> results of the Barabási-Albert model of SNAP's Facebook dataset. The Holme-Kim model should have a higher clustering value than the Barabási-Albert model.
+**Figure 1-2.** *Results we generate using data from SNAP. The results under "HK" are our results, while the results under "HK Expected" are what we expect for the HK model based on Downey's replication of the BA model in* Think Complexity, *which also makes use of the Facebook dataset from SNAP.*
 
-Figure 1 displays our implementation result. We confirm a higher clustering value for our HK implementation than for _Holme Kim Expected_ which we expect from the results of the BA model.
+Figure 1 displays our implementation result. We confirm that our results under "Facebook" in Figure 1-1 are relatively close to the results we expect - the largest margin of error is 0.009. We also confirm a higher clustering value for our implementation of the HK model than for "HK Expected" in Figure 1-2, where the values for "HK Expected" are derived from our expectation that the HK model should have a higher clustering coefficient than that of the BA model.
 
-We also generate probability mass functions (PMF) to examine the the degree distributions of the Facebook data and our HK implementation. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and indicating that these are scale-free networks.
+We also generate probability mass functions (PMFs) to examine the the degree distributions of the Facebook data and our HK model. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and indicating that these are scale-free networks.
 
 ![figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
