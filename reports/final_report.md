@@ -47,7 +47,7 @@ We then implement the additional step in the HK model:
 
 Figure 1 displays our implementation result. We confirm that our results under "Facebook" in Figure 1-1 are relatively close to the results we expect - the largest margin of error is 0.009. We also confirm a higher clustering value for our implementation of the HK model than for "HK Expected" in Figure 1-2, where the values for "HK Expected" are derived from our expectation that the HK model should have a higher clustering coefficient than that of the BA model.
 
-We also generate probability mass functions (PMFs) to examine the the degree distributions of the Facebook data and our HK model. As Figure 2 shows, the PMF for the Facebook data is less linear than the PMF for our HK model, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and that these are scale-free networks.
+We also generate probability mass functions (PMFs) to examine the degree distributions of the Facebook data and our HK model. As Figure 2 shows, the PMF for the Facebook data is less linear than the PMF for our HK model, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and that these are scale-free networks.
 
 ![figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
@@ -67,51 +67,55 @@ As Figure 3 shows, the CDF for our replication of the HK model is clearly differ
 
 Figure 4 shows that the CCDF of our HK model replication almost aligns with the CCDF of the Facebook dataset. The CCDF of the HK model is also almost a straight line, meaning the distribution obeys a power law. This indicates that the HK model we generate does exhibit scale-free behavior. In combination with our results from Figure 1-2 (which show that our HK model has a high clustering coefficient), our HK model can be characterized as scale-free and highly clustered, both of which are key features of the original HK model.
 
-### Detaching Preferential Attachment
-In their experiment, Barabási and Albert find that they must generate scale-free with all three conditions–the initial condition, growth, and preferential attachment–in order to  generate scale-free networks successfully. If any of the conditions are removed, their model is no longer scale-free. Like Barabási and Albert, we remove conditions from the HK model to find that scale-free, clustered networks can still be generated without preferential attachment.
 
-In order to produce scale-free, clustered networks without preferential attachment, we extend Holme and Kim's "triad formation" step. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of 2 triads per node as well as 2 triads in the initial time step. This special case is similar to our model.<sup>4</sup> We modify and optimize the procedure to:
 
-1. **Initial condition**: In the beginning, the network consists of 3 vertices that are all connected to each other, so each vertex has a degree of 2.
+### Removing Preferential Attachment
+In their experiment, Barabási and Albert find that they must include all three of their conditions - the initial condition, growth, and preferential attachment - in order to  generate scale-free networks successfully. If any of the conditions are removed, their model is no longer scale-free.<sup>1</sup> Like Barabási and Albert, we remove conditions from the HK model and find that scale-free, clustered networks can still be generated without preferential attachment.
+
+In order to produce scale-free, clustered networks without preferential attachment, we extend Holme and Kim's triad formation step. In Holme and Kim's experiment, there is a special case in which the average number of triads formed per time step is 1, and there is an average of 2 triads per node as well as 2 triads in the initial time step. This special case is similar to a model in which random triads are generated for each time step.<sup>4</sup>
+
+We therefore modify and optimize the HK model procedure by removing the PA step and modifying the TF step:
+
+1. **Initial condition**: In the beginning, the network consists of one triad - 3 vertices that are all connected to each other, so each vertex has a degree of 2.
 
 2. **Growth**: One vertex _v_ gets added with every time step. Time _t_ is the number of time steps.
 
-3. **Random edge selection**: Select a random existing edge and connect _v_ to both vertices of the edge.
+3. **Random triad formation**: Select one random existing edge _m_ and connect _v_ to both vertices of _m_.
 
-We generate a network with removed preferential attachment, the RPA model, of the same size as our Holme-Kim replication, as shown in Figure 5.
+We then generate a network with this "removed preferential attachment" procedure, which we will refer to as the RPA model. Our RPA model is the same size as our HK model to make comparing the results of the two easier, as shown in Figure 5.
 
-|              | RPA      | Holme-Kim |
+|              | RPA      | HK        |
 |  ------      | ------   | ------    |
 | Nodes        | 4039     | 4039      |
 | Clustering   | 0.751    | 0.256     |
 | Path Length  | 5.698    | 2.746     |
 | Mean Degrees | 3.999    | 43.754    |
 
-**Figure 5.** The results under _RPA_ are the results from RPA and the results under _Holme-Kim_ are the results from our HK model, which are reproduced here to make comparing the values easier.
+**Figure 5.** *The results under "RPA" are the results from our RPA model and the results under "HK" are the results from our HK model.*
 
-As Figure 5 shows, RPA shows higher clustering than our HK model.
+As Figure 5 shows, our RPA model demonstrates higher clustering than our HK model. Since this model has the high clustering property, the other property we test for is scale-free behavior. We do so by generating PMFs for our RPA model and Facebook dataset results.
 
 ![figure 6 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Modified.png)
 
-**Figure 6.** PMFs for our Facebook and RPA results.
+**Figure 6.** *PMFs for the results of our RPA model and the Facebook dataset.*
 
-From the PMF graph's linearity shown in Figure 6, our neighborhood network is a scale-free network. We then generate a CDF graph to get a clearer picture of our distribution.
+Based on the PMF's linearity in Figure 6, the RPA procedure generates a scale-free network. We then generate a CDF to get a clearer picture of our distribution.
 
 ![figure 7 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Modified.png)
 
-**Figure 7.** CDFs for our Facebook and RPA results.
+**Figure 7.** *CDFs for the results of our RPA model and the Facebook dataset.*
 
-As Figure 7 shows, there is a large disparity between the two CDFs, though their shapes are similar. Based on these CDFs, it is possible that for larger degrees, the graphs do overlap. As a final step, we generate CCDF graphs to get a final look at the similarities between the distributions.
+As Figure 7 shows, there is a large disparity between the two CDFs, though their shapes are similar. Based on these CDFs, it is possible that for larger degrees, the graphs overlap. As a final step, we generate CCDF graphs to get a closer look at the similarities between the distributions.
 
 ![figure 8 CCDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Modified.png)
 
-**Figure 8.** CCDFs for our Facebook and RPA results.
+**Figure 8.** *CCDFs for the results of our RPA model and the Facebook dataset.*
 
-The CCDFs still show a disparity between the two graphs. However, the CCDF of RPA is linear, indicating that RPA is a scale-free network without preferential attachment. While the PA step is important for the Barabási-Albert model to simulate social networks, the PA and TF steps are not necessary to simulate a clustered, scale-free social network.
+The CCDFs still show a disparity between the two graphs. However, the CCDF of our RPA model is linear, indicating that our RPA model is a scale-free network, even without preferential attachment. In combination with our findings as shown in Figure 5, we conclude that our RPA model is a clustered and scale-free network. Therefore, while the PA step is important for the BA model to generate a scale-free network, it is not necessary for the HK model to generate a clustered and scale-free network, since the introduction of the TF step is sufficient to generate these behaviors.
 
-In conclusion, we confirm Holme and Kim's proposal that including triad formations on the Barabási-Albert method of generating networks yields a network with a clustering coefficient closer to that of a real network, like Facebook. However, we find that scale-free networks can still be generated for networks in which preferential attachment does not exist.
+In conclusion, we confirm Holme and Kim's proposal that introducing the TF step to the BA model method yields a network with higher clustering, similar to that of a real network, like Facebook. However, we find that scale-free and clustered networks can still be generated without the PA step, as utilizing a modified version of the TF step is sufficient to generate these behaviors.
 
-The clustering of our RPA model is higher than that of the the Facebook dataset, indicating that RPA is more clustered than a Facebook network. This Facebook data, however, only contains data for 4039 users, so this indication might not be wholly accurate.
+We observe that the clustering of our RPA model is higher than that of the Facebook dataset, indicating that our RPA model is more clustered than a true Facebook network. The Facebook dataset we use, however, only contains data for a network of 4039 users, so this indication might not be completely accurate.
 
 -----
 
