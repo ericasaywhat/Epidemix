@@ -47,25 +47,25 @@ We then implement the additional step in the HK model:
 
 Figure 1 displays our implementation result. We confirm that our results under "Facebook" in Figure 1-1 are relatively close to the results we expect - the largest margin of error is 0.009. We also confirm a higher clustering value for our implementation of the HK model than for "HK Expected" in Figure 1-2, where the values for "HK Expected" are derived from our expectation that the HK model should have a higher clustering coefficient than that of the BA model.
 
-We also generate probability mass functions (PMFs) to examine the the degree distributions of the Facebook data and our HK model. As Figure 2 shows, the PMF curve for the Facebook data is less linear than the curve for Holme and Kim's experiment, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and indicating that these are scale-free networks.
+We also generate probability mass functions (PMFs) to examine the the degree distributions of the Facebook data and our HK model. As Figure 2 shows, the PMF for the Facebook data is less linear than the PMF for our HK model, but both are approximately linear, as the dashed lines show, suggesting that the distributions of degrees of these graphs obey a power law and that these are scale-free networks.
 
 ![figure 2 PMF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/PMFGraphs_Original.png)
 
-**Figure 2.** PMFs for our Facebook and Holme Kim results. For higher values, there is more noise in both graphs. There are some outliers for lower degrees in the HK graph PMF.
+**Figure 2.** *PMFs for our Facebook and HK model results. For higher values, there is more noise in both graphs. There are some outliers for lower degrees in the PMF of the HK graph.*
 
-To get a clearer idea of how reasonable our results, we generate cumulative distribution functions (CDFs), which are less noisy than PMFs and show the shape of the distribution more clearly.<sup>3</sup> Figure 3 shows the CDF of the results of our HK implementation overlaid on the CDF of the Facebook dataset. Both CDFs are similar in shape and distribution of degrees.
+To get a clearer idea of how reasonable our results are, we generate cumulative distribution functions (CDFs), which are less noisy than PMFs and show the shape of the distribution more clearly.<sup>3</sup> Figure 3 shows the CDF of the results of our implementation of the HK model overlaid on the CDF of the Facebook dataset. Both CDFs are similar in shape and distribution of degrees.
 
 ![figure 3 CDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CDFGraphs_Original.png)
 
-**Figure 3.** CDFs for our Facebook and Holme Kim results. The graphs almost align for higher values, but it is difficult to tell how close they really are.
+**Figure 3.** *CDFs for our Facebook and HK model results. The graphs seem to align for higher values.*
 
-As Figure 3 shows, the CDF for our HK implementation is clearly different from the CDF for the Facebook dataset, especially for lower degree values, but for higher values, the two curves become more aligned - although how much more is difficult to tell. To determine just how well the CDF graphs align for higher values, we finally generate complementary cumulative distribution function (CCDF) graphs. CCDF graphs are useful because if a distribution really obeys a power law, the CCDF will be a straight line on a log-log scale.
+As Figure 3 shows, the CDF for our replication of the HK model is clearly different from the CDF for the Facebook dataset, especially for lower degree values. However, for higher values, the two curves become more aligned, although how much more is difficult to tell. To determine how well the CDF graphs align for higher values, we generate complementary cumulative distribution functions (CCDFs). CCDF graphs are useful because if a distribution really obeys a power law, the CCDF will be a straight line on a log-log scale.
 
 ![figure 4 CCDF graphs](https://github.com/ericasaywhat/Epidemix/blob/master/reports/CCDFGraphs_Original.png)
 
-**Figure 4.** CCDFs for our Facebook and HK results. 
+**Figure 4.** *CCDFs for our Facebook and HK results.*
 
-Figure 4 shows that the CCDF of our Holme-Kim replication matches the CCDF graph of the Facebook dataset well. The CCDF of the HK model is also almost a straight line, meaning the distribution obeys a power law, which is a characteristic of scale-free networks.
+Figure 4 shows that the CCDF of our HK model replication almost aligns with the CCDF of the Facebook dataset. The CCDF of the HK model is also almost a straight line, meaning the distribution obeys a power law. This indicates that the HK model we generate does exhibit scale-free behavior. In combination with our results from Figure 1-2 (which show that our HK model has a high clustering coefficient), our HK model can be characterized as scale-free and highly clustered, both of which are key features of the original HK model.
 
 ### Detaching Preferential Attachment
 In their experiment, Barabási and Albert find that they must generate scale-free with all three conditions–the initial condition, growth, and preferential attachment–in order to  generate scale-free networks successfully. If any of the conditions are removed, their model is no longer scale-free. Like Barabási and Albert, we remove conditions from the HK model to find that scale-free, clustered networks can still be generated without preferential attachment.
